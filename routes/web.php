@@ -198,3 +198,9 @@ Route::put('updateCar/{id}', [CarController::class,'update'])->name('updateCar')
 Route::get('carDetail/{id}', [CarController::class,'show'])->name('carDetail');
 Route::get('deleteCar/{id}', [CarController::class,'destroy']);
 
+Route::get('trashed', [CarController::class,'trashed']); 
+Route::get('carDeleted/{id}', [CarController::class,'carDeleted']);
+Route::get('restoreCar/{id}', [CarController::class,'restoreCar']);
+
+
+
