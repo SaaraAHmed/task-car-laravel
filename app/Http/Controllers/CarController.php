@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 use \App\Models\Car;
 
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use Common;
+    
     private $columns = ['carTitle', 'description','published'];
+    
     /**
      * Display a listing of the resource.
      */
@@ -56,21 +61,49 @@ class CarController extends Controller
        
     //     $cars->save( );
     //     return "car data added successfully";
-    
-    $data=$request->only($this->columns);
-    $data['published']=isset($data['published']) ? true : false;
+    //
 
-    $request->validate([
-        'carTitle'=>'required|string|max:5',
-        'description'=>'required|string',
 
-    ]);
-    Car::create($data);
-    return 'done successfully';
+    //2
+    // $data=$request->only($this->columns);
+    // $data['published']=isset($data['published']) ? true : false;
+
+    // $request->validate([
+    //     'carTitle'=>'required|string|max:5',
+    //     'description'=>'required|string',
+
+    // ]);
+    // Car::create($data);
+    // return 'done successfully';
+    // }
+
+     //another way to add message
+     //to  add for example published is 1 or 0 to car (title and desc ).
+     $message=[
+        'carTitle.required'=>'tilte is require',
+        'description.required'=>'should be exist',
+
+     ];
+     $data=$request->validate([
+            'carTitle'=>'required|string',
+            'description'=>'required|string',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ],$message);
+        // return ddd($data);
+       
+
+         $fileName =$this->uploadFile($request->image,'assets/images');
+         $data['image']=$fileName ;
+         $data['published']=isset($request['published'])? 1 : 0 ;
+         Car::create($data);
+         return 'done';
+
+       
     }
     /**
      * Display the specified resource.
      */
+    
     public function show(string $id)
     {
         // return view('carDetail');
@@ -86,6 +119,10 @@ class CarController extends Controller
         // return 'the id is: '.$id;
         $car=Car::findOrFail($id);
         return view('updatecar',compact('car'));
+
+                                                                                  // task8 update image
+        $car=Car::findOrFail($id);
+        return view('updateImage',compact('car'));
     }
 
     /**
@@ -95,7 +132,13 @@ class CarController extends Controller
     {
         Car::where('id', $id)->update($request->only($this->columns));
         return 'Updated';
+ 
+                                                                                    //// task8 update image
+        
+                                                                                    
+
     }
+   
     /**
      * Remove the specified resource from storage.
      */

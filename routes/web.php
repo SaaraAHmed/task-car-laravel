@@ -202,5 +202,10 @@ Route::get('trashed', [CarController::class,'trashed']);
 Route::get('carDeleted/{id}', [CarController::class,'carDeleted']);
 Route::get('restoreCar/{id}', [CarController::class,'restoreCar']);
 
+Route::get('showUpload', [Examplecontroller::class,'showUpload']);
+Route::post('upload', [Examplecontroller::class,'upload'])->name('upload');
 
+//task 8 upadte Image
 
+Route::get('editImage/{id}', [Examplecontroller::class,'editImage']);
+Route::put('updateImage/{id}', [Examplecontroller::class,'updateImage'])->name('updateImage');

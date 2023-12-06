@@ -19,7 +19,9 @@
         <th>title</th>
         <th>description</th>
         <th>published</th>
-        <th>Edit</th>
+         <th>image</th>
+         <th>Edit  image</th>
+        <th>Edit</th> 
         <th>show</th>
         <th>delete</th>
       </tr>
@@ -29,6 +31,7 @@
       <tr>
         <td>{{ $car->carTitle }}</td>
         <td>{{ $car->description }}</td>
+              
         <td>
            @if($car->published)
               yes
@@ -36,10 +39,13 @@
               no 
             @endif  
         </td>
-        <td><a href="editCar/{{ $car->id }}" >Edit</a></td>
+        <td>{{ $car->image }}</td>  
+        
+        <td><a href="editImage/{{ $car->id }}" >edit Image</a></td>
+        <td><a href="editCar/{{ $car->id }}" >Edit</a></td> 
         <td><a href="carDetail/{{ $car->id }}" >show</a></td>
         <td><a href="deleteCar/{{ $car->id }}" >delete</a></td>
-
+        
        </tr>
        @endforeach
       <!-- <tr>

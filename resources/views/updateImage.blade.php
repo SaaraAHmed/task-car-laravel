@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Upload</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,8 +11,8 @@
 <body>
 
 <div class="container">
-  <h2>update Car</h2>
-  <form action="{{route('updateCar',$car->id)}}"  method="POST" >
+  <h2>Update file image</h2>
+  <form class="form-horizontal" action="{{route('updateImage',$car->id)}}"  method="POST" enctype="multipart/form-data" >
      @csrf
      @method('put') 
      <label for="title">Title:</label>
@@ -23,14 +23,28 @@
         <label for="description">Description:</label>
         <textarea class="form-control" rows="5" id="description" name="description"  >{{$car->description}}</textarea>
       </div> 
-    <div class="checkbox">
+
+    <div class="form-group">>
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+            @error('image')
+                {{ $message }}
+            @enderror
+            </div>
+   <div class="checkbox">
       <label><input type="checkbox" name="published" @checked($car->published)> Published </label>
     </div>
-    <button type="submit" class="btn btn-default"> update car</button>
+    <button type="submit" class="btn btn-default">update submit</button>
 
-
+    
   </form>
 </div>
 
 </body>
 </html>
+
+
+
+
+
+
