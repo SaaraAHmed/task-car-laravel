@@ -47,4 +47,18 @@ class Examplecontroller extends Controller
 
     }
    
+
+    public function place(){
+        return view("place");
+    }
+
+
+    
+    public function blog(){
+        return view("blog");
+    }
+
+    public function login(){
+        return view('login');
+    }
 }
