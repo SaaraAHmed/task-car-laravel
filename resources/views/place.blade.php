@@ -110,7 +110,9 @@
 									</div>
 								</div>
 								<div class="single-explore-txt bg-theme-1">
+								@foreach($places as $place)
 									<h2 value="{{ $place->exploreTitle }}"><a href="#">tommy helfinger bar</a></h2>
+									@endforeach
 									<p class="explore-rating-price">
 										<span class="explore-rating">5.0</span>
 										<a href="#"> 10 ratings</a> 
