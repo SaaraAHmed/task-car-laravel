@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Examplecontroller;
 use App\Http\Controllers\CarController;
-
+use App\Http\Controllers\ExploreController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -215,4 +215,8 @@ Route::get('blog', [Examplecontroller::class,'blog']);
 
 Route::get('login',[ExampleController::class, 'login']);
 
+
+Route::post('storeExplore', [ExploreController::class,'store'])->name('storeExplore');
 Route::get('createExplore',[ExploreController::class,'create']);
+
+Route::get('places',[ExploreController::class,'index']);

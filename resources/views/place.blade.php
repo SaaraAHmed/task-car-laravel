@@ -110,7 +110,7 @@
 									</div>
 								</div>
 								<div class="single-explore-txt bg-theme-1">
-									<h2><a href="#">tommy helfinger bar</a></h2>
+									<h2 value="{{ $place->exploreTitle }}"><a href="#">tommy helfinger bar</a></h2>
 									<p class="explore-rating-price">
 										<span class="explore-rating">5.0</span>
 										<a href="#"> 10 ratings</a> 

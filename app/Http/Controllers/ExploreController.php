@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use \App\Models\Place;
+
 
 class ExploreController extends Controller
 {
-    
+    private $columns = ['exploreTitle','from','to', 'description'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $places= Place::get();
+        return view('places',compact('places'));
     }
 
     /**
@@ -20,7 +24,7 @@ class ExploreController extends Controller
      */
     public function create()
     {
-        return view('explore');
+        return view('addExplore');
     }
 
     /**
@@ -28,7 +32,17 @@ class ExploreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $places= new Place;
+        $places->image=$request->image;
+        $places->exploreTitle=$request->exploreTitle;
+        $places->from=$request->from;
+        $places->to=$request->to;
+        $places->description=$request->description;
+       
+        $places->save( );
+        return "places data added successfully";
+    
     }
 
     /**
