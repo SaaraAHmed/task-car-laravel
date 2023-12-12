@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>cars</title>
+  <title>trashed cars</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,7 +11,7 @@
 <body>
 
 <div class="container">
-  <h2>list</h2>
+  <h2>trashed</h2>
   <p>The .table-hover class enables a hover state on table rows:</p>            
   <table class="table table-hover">
     <thead>
@@ -21,28 +21,23 @@
         <th>from</th>
         <th>to</th>
         <th>description</th> 
-        <th>edit Image</th> 
-        <th>Edit</th> 
-        <th>show</th>
-        <th>delete</th>
+        <th>Restore</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
      @foreach($places as $place)
       <tr>
-        <td>{{ $place->image }}</td> 
-        <td>{{ $place->exploreTitle }}</td>
-        <td>{{ $place->from }}</td>
-        <td>{{ $place->to }}</td>
-        <td>{{ $place->description }}</td>
+        <td>{{ $place->image }}</td>
+        <td>{{ $place->exploreTitle }}</td>      
+        <td>{{ $place->from }}</td>      
+        <td>{{ $place->to }}</td>      
+        <td>{{ $place->description }}</td>      
 
-         
-        
-        <td><a href="editImage/{{ $place->id }}" >edit Image</a></td>
-        <td><a href="editplace/{{ $place->id }}" >Edit</a></td> 
-        <td><a href="placeDetail/{{ $place->id }}" >show</a></td>
-        <td><a href="deletePlace/{{ $place->id }}" >delete</a></td>
-        
+
+        <td><a href="restorePlace/{{ $place->id }}" >Restore</a></td>
+        <td><a href="placeDeleted/{{ $place->id }}" >Delete</a></td>
+
        </tr>
        @endforeach
       <!-- <tr>

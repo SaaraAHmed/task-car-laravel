@@ -216,7 +216,19 @@ Route::get('blog', [Examplecontroller::class,'blog']);
 Route::get('login',[ExampleController::class, 'login']);
 
 
+
+
 Route::post('storeExplore', [ExploreController::class,'store'])->name('storeExplore');
 Route::get('createExplore',[ExploreController::class,'create']);
 
-Route::get('places',[ExploreController::class,'index']);
+Route::get('placeDetail/{id}', [ExploreController::class,'show'])->name('placeDetail');
+Route::get('deletePlace/{id}', [ExploreController::class,'destroyPlace']);
+
+Route::get('places',[ExploreController::class,'indexx']);
+Route::get('editPlace/{id}', [CarController::class,'editPlace']);
+Route::put('updatePlace/{id}', [CarController::class,'updatePlace'])->name('updatePlace');
+
+
+Route::get('trashedPlace', [ExploreController::class,'trashedPlace']); 
+Route::get('placeDeleted/{id}', [ExploreController::class,'placeDeleted']);
+Route::get('restorePlace/{id}', [ExploreController::class,'restorePlace']);

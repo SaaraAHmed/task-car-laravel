@@ -13,9 +13,11 @@ class ExploreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function indexx()
     {
+        // $places= Place::query()->limit(6)->get();
         $places= Place::get();
+
         return view('places',compact('places'));
     }
 
@@ -30,21 +32,43 @@ class ExploreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+    // {
         
-        $places= new Place;
-        $places->image=$request->image;
-        $places->exploreTitle=$request->exploreTitle;
-        $places->from=$request->from;
-        $places->to=$request->to;
-        $places->description=$request->description;
+    //     $places= new Place;
+    //     $places->image=$request->image;
+    //     $places->exploreTitle=$request->exploreTitle;
+    //     $places->from=$request->from;
+    //     $places->to=$request->to;
+    //     $places->description=$request->description;
        
-        $places->save( );
-        return "places data added successfully";
+    //     $places->save( );
+    //     return "places data added successfully";
     
-    }
+    // }
+    $message=[
+        'image.required'=>'tilte is require',
+        'exploreTitle.required'=>'should be exist',
 
+     ];
+     $data=$request->validate([
+         'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'exploreTitle'=>'required|string',
+            'from'=>'required',
+            'to'=>'required',
+            'description'=>'required|string',
+            
+        ],$message);
+        // return ddd($data);
+       
+
+         $fileName =$this->uploadFile($request->image,'assets/images');
+         $data['image']=$fileName ;
+         Place::create($data);
+         return 'done';
+
+
+}
     /**
      * Display the specified resource.
      */
@@ -56,24 +80,47 @@ class ExploreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function editPlace(string $id)
     {
-        //
+        $place=Place::findOrFail($id);
+        return view('updatePlace',compact('place'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updatePlace(Request $request, string $id)
     {
-        //
+       
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroyPlace(string $id)   :RedirectResponse
     {
-        //
+        Place::where('id', $id)->delete( );
+        return  redirect('places');
     }
+    
+    public function trashedPlace() 
+    {       
+        // return 'deleteCar successfull';
+        $places= Place::onlyTrashed()->get( );
+        return view('trashedPlace',compact('places'));
+
+    }
+    
+    public function placeDeleted(string $id) :RedirectResponse
+    {
+        Place::where('id', $id)->forceDelete( );
+        return  redirect('places');
+    }
+
+    public function restorePlace(string $id) :RedirectResponse
+    {
+        Place::where('id', $id)->restore( );
+        return  redirect('places');
+    }
+
 }
