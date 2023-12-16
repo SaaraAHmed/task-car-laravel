@@ -84,14 +84,39 @@ class ExploreController extends Controller
     {
         $place=Place::findOrFail($id);
         return view('updatePlace',compact('place'));
+                            
+        // $place=Place::findOrFail($id);
+        // return view('updateImage',compact('car'));
     }
+   
 
     /**
      * Update the specified resource in storage.
      */
     public function updatePlace(Request $request, string $id)
     {
-       
+        $messages= $this->messages();
+
+    $data = $request->validate([
+        'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        'exploreTitle'=>'required|string',
+        'from'=>'required',
+        'to'=>'required',
+        'description'=>'required|string',
+        'category_id'=>'required',
+    ], $messages);
+    
+    $data['published'] = isset($request->published);
+
+    // update image if new file selected
+    if($request->hasFile('image')){
+        $fileName = $this->uploadFile($request->image, 'assets/images');
+        $data['image']= $fileName;
+    }
+
+    //return dd($data);
+    Place::where('id', $id)->update($data);
+    return 'Updated';
     }
 
     /**

@@ -23,6 +23,14 @@
         <label for="description">Description:</label>
         <textarea class="form-control" rows="5" id="description" name="description"  >{{$car->description}}</textarea>
       </div> 
+      <select name="category_id" id="">description
+              <option value="">select caregory</option>
+              
+              @foreach ($categories as $category)
+              <option value="{{  $category->id  }}">{{ $category->categoryName }}</option>
+              @endforeach
+
+        </select> 
       <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
@@ -34,6 +42,8 @@
     <div class="checkbox">
       <label><input type="checkbox" name="published" @checked($car->published)> Published </label>
     </div>
+    
+
 
     <button type="submit" class="btn btn-default"> update car</button>
 

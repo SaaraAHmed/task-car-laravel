@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 use \App\Models\Car;
+use \App\Models\Category;
 
 use App\Traits\Common;
 
@@ -30,7 +31,9 @@ class CarController extends Controller
      */
     public function create()
     {
-       return view('addcars');
+    //    return view('addcars');
+       $categories= Category::select('id','categoryName')->get();
+       return view('addcars',compact('categories'));
     }
 
     /**

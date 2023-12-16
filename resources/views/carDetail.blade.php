@@ -15,6 +15,7 @@
   car Title : "{{$car->carTitle}}" <br>
   car Description : "{{$car->description}}" <br>
   car Published : "{{$car->Published}}" <br>
+  car category : {{$car->category->categoryName}} <br>
   <form action="{{ route('storeCar')}}" method="POST">
       @csrf
     <div class="form-group">

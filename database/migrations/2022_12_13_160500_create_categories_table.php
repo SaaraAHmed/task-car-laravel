@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('places', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('image',100);
-            $table->string('exploreTitle',100);
-            $table->boolean('from');
-            $table->boolean('to');
-            $table->text('description');
-
-            $table->softDeletes();
+            $table->string('categoryName');
             $table->timestamps();
-            });
+        });
     }
 
     /**
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('places');
+        Schema::dropIfExists('categories');
     }
 };

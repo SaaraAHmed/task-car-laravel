@@ -22,7 +22,8 @@ class PlaceFactory extends Factory
             'from' => fake()->boolean(),
             'to' => fake()->boolean(),
             'description' => fake()->text(),
-            
+            'category_id' => fake()->numberBetween($min=1,$max=2),
+
             // 'shortDescription' => fake()->text(),
         ];
     }

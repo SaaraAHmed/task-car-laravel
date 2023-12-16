@@ -33,7 +33,15 @@
         @error('description')
             {{$message}}
         @enderror
-      </div> 
+      </div>
+      <select name="category_id" id="">description
+              <option value="">select caregory</option>
+              
+              @foreach ($categories as $category)
+              <option value="{{  $category->id  }}">{{ $category->categoryName }}</option>
+              @endforeach
+
+        </select> 
       <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
@@ -41,6 +49,7 @@
                 {{ $message }}
             @enderror
         </div>
+        
 
     <div class="checkbox">
       <label><input type="checkbox" name="published" value="{{old('published')}}"> Published</label>

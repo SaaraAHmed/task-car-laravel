@@ -225,8 +225,8 @@ Route::get('placeDetail/{id}', [ExploreController::class,'show'])->name('placeDe
 Route::get('deletePlace/{id}', [ExploreController::class,'destroyPlace']);
 
 Route::get('places',[ExploreController::class,'indexx']);
-Route::get('editPlace/{id}', [CarController::class,'editPlace']);
-Route::put('updatePlace/{id}', [CarController::class,'updatePlace'])->name('updatePlace');
+Route::get('editPlace/{id}', [ExploreController::class,'editPlace']);
+Route::put('updatePlace/{id}', [ExploreController::class,'updatePlace'])->name('updatePlace');
 
 
 Route::get('trashedPlace', [ExploreController::class,'trashedPlace']); 
