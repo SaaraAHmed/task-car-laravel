@@ -15,7 +15,7 @@ class CarController extends Controller
 {
     use Common;
     
-    private $columns = ['carTitle', 'description','published'];
+    private $columns = ['carTitle', 'description','published','category_id'];
     
     /**
      * Display a listing of the resource.
@@ -91,6 +91,7 @@ class CarController extends Controller
             'carTitle'=>'required|string',
             'description'=>'required|string',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
         ],$message);
         // return ddd($data);
        
@@ -126,6 +127,9 @@ class CarController extends Controller
                                                                                   // task8 update image
         $car=Car::findOrFail($id);
         return view('updateImage',compact('car'));
+
+        $categories=Category::findOrFail($id);
+        return view('updateCarcategory',compact('categories'));
     }
 
     /**
@@ -142,7 +146,8 @@ class CarController extends Controller
     $data = $request->validate([
         'carTitle'=>'required|string',
         'description'=>'required|string',
-        'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        'image' => 'sometimes|max:2048',
+        'category_id' => 'required',
     ], $messages);
     
     $data['published'] = isset($request->published);
@@ -156,7 +161,9 @@ class CarController extends Controller
     //return dd($data);
     Car::where('id', $id)->update($data);
     return 'Updated';
-                                                                                    
+
+    categories::where('id', $category_id)->update($data);
+    return 'Updated';                                                                        
 
     }
    

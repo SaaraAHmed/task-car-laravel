@@ -12,7 +12,7 @@
 
 <div class="container">
   <h2>update Car</h2>
-  <form action="{{route('updateCar',$car->id)}}"  method="POST" >
+  <form action="{{route('updatCarcategory',$car->id)}}"  method="POST" >
      @csrf
      @method('put') 
      <label for="title">Title:</label>

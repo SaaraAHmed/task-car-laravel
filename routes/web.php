@@ -209,12 +209,16 @@ Route::post('upload', [Examplecontroller::class,'upload'])->name('upload');
 
 // Route::get('editImage/{id}', [Examplecontroller::class,'editImage']);
 // Route::put('updateImage/{id}', [Examplecontroller::class,'updateImage'])->name('updateImage');
+
 Route::get('place', [Examplecontroller::class,'place']);
 
 Route::get('blog', [Examplecontroller::class,'blog']);
 
 Route::get('login',[ExampleController::class, 'login']);
 
+
+Route::get('editCar/{id}', [CarController::class,'edit']);
+Route::put('updatCarcategory/{id}', [CarController::class,'update'])->name('updatCarcategory');
 
 
 
