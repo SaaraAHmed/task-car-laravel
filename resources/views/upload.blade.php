@@ -12,8 +12,8 @@
 
 <div class="container">
   <h2>Upload file image</h2>
-  <form class="form-horizontal" action="{{ route('upload') }}"  method="POST" enctype="multipart/form-data" >
-      @csrf
+  <form class="form-horizontal" action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
+    @csrf
     <div class="form-group">
       <label class="control-label col-sm-2" for="image">Image:</label>
       <div class="col-sm-10">
@@ -23,8 +23,6 @@
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Submit</button>
-
-        
       </div>
     </div>
   </form>

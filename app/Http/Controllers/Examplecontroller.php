@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-
-
+use App\Mail\contactMail;
+// use Illuminate\Http\contactMail;
 
 
 use App\Traits\Common;
@@ -61,4 +61,22 @@ class Examplecontroller extends Controller
     public function login(){
         return view('login');
     }
+
+    public function contact(){
+        return view('contact');
+    }
+
+    // public function receiveContact(request $request){
+    //     $content =[
+    //         'name '=>$request->name,
+    //         'email' =>$request->email,
+    //         'subject '=>$request->subject,
+    //         'message' =>$request->message,
+
+    //     ]
+    //     Mail::to('recipient@email.com')->send(
+    //         new ContactMail($contact),
+    //     )
+    //     return "mail";
+    // }
 }

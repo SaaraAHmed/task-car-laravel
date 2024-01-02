@@ -15,15 +15,18 @@ class CarController extends Controller
 {
     use Common;
     
-    private $columns = ['carTitle', 'description','published','category_id'];
+    private $columns = ['carTitle', 'description','published'];
     
     /**
      * Display a listing of the resource.
      */
+    
+     
     public function index()
     {
        $cars= Car::get();
-        return view('cars',compact('cars'));
+        return view ('cars',compact('cars'));
+        
     }
 
     /**
@@ -122,14 +125,11 @@ class CarController extends Controller
     {
         // return 'the id is: '.$id;
         $car=Car::findOrFail($id);
-        return view('updatecar',compact('car'));
+        $categories= Category::select('id','categoryName')->get();
+        return view('updatecar',compact('car','categories'));
 
                                                                                   // task8 update image
-        $car=Car::findOrFail($id);
-        return view('updateImage',compact('car'));
-
-        $categories=Category::findOrFail($id);
-        return view('updateCarcategory',compact('categories'));
+    
     }
 
     /**
@@ -140,7 +140,7 @@ class CarController extends Controller
         // Car::where('id', $id)->update($request->only($this->columns));
         // return 'Updated';
  
-                                                                                    //// task8 update image
+       print_r($request->carTitle)  ;                                                                           //// task8 update image
     $messages= $this->messages();
 
     $data = $request->validate([
@@ -162,8 +162,7 @@ class CarController extends Controller
     Car::where('id', $id)->update($data);
     return 'Updated';
 
-    categories::where('id', $category_id)->update($data);
-    return 'Updated';                                                                        
+                                                                         
 
     }
    
@@ -205,5 +204,24 @@ class CarController extends Controller
             'description.required'=> 'should be text',
         ];
     }
+
+    
+    public function contactCar(){
+        return view('contact');
+    }
+
+    // public function receiveContactCar(request $request){
+    //     $content =[
+    //         'carTitle '=>$request->name,
+    //         'description' =>$request->email,
+    //         'image '=>$request->subject,
+    //         'category_id' =>$request->message,
+
+    //     ]
+    //     Mail::to('recipient@email.com')->send(
+    //         new ContactMail($contact),
+    //     )
+    //     return "mail";
+    // }
    
 }

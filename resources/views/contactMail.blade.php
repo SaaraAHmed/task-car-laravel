@@ -9,25 +9,36 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+  
 <div class="container">
-  <h2>update Car</h2>
-  <form action="{{route('updatCarcategory',$car->id)}}"  method="POST" >
-     @csrf
-     @method('put') 
-     <label for="title">Title:</label>
-      <input type="text" class="form-control" id="carTitle" placeholder="Enter title" name="title" value="{{$car->carTitle}}">
+  <h2>Add Car</h2>
+  <form action="{{ route('recieveContact')}}" method="POST" enctype="multipart/form-data">
+      @csrf
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="carTitle" placeholder="Enter title" name="carTitle" value="{{old('carTitle')}}" >
+       @error('carTitle')
+       <div class="alert alert-warning">
+        {{$message}}
+      </div>    
+      @enderror
     </div>
-    
+    <!-- <div class="form-group">
+      <label for="description">description:</label>
+      <input type="text" class="form-control" id="description" placeholder="Enter desc" name="description">
+    </div> -->
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" id="description" name="description"  >{{$car->description}}</textarea>
-      </div> 
+        <textarea class="form-control" rows="5" id="description" name="description" >{{old('description')}}</textarea>
+        @error('description')
+            {{$message}}
+        @enderror
+      </div>
       <select name="category_id" id="">description
               <option value="">select caregory</option>
               
               @foreach ($categories as $category)
-              <option value="{{  $category->id  }}">{{ $car->category->categoryName }}</option>
+              <option value="{{  old($category->id)  }}">{{ $category->categoryName }}</option>
               @endforeach
 
         </select> 
@@ -37,19 +48,18 @@
             @error('image')
                 {{ $message }}
             @enderror
-            </div>
+        </div>
+        
 
     <div class="checkbox">
-      <label><input type="checkbox" name="published" @checked($car->published)> Published </label>
+      <label><input type="checkbox" name="published" value="{{old('published')}}"> Published</label>
     </div>
+    <button type="submit" class="btn btn-default">Add</button>
     
-
-
-    <button type="submit" class="btn btn-default"> update car</button>
-
 
   </form>
 </div>
 
 </body>
 </html>
+

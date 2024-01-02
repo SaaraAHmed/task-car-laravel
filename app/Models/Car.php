@@ -13,8 +13,9 @@ class Car extends Model
         'description',
         'image',
         'published',
-        'category_id'
-        
+        'category_id',
+        'mobile'
+
         ];
 
         public function category( ) {

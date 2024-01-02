@@ -21,6 +21,16 @@ class ExploreController extends Controller
         return view('places',compact('places'));
     }
 
+    public function mySession()
+    {
+       
+        session()->put('test','first laravel session');
+         $data= session('test');
+        return view('session',compact('data'));
+
+      
+    }
+
     /**
      * Show the form for creating a new resource.
      */

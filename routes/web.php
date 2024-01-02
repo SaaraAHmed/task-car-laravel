@@ -191,7 +191,7 @@ Route::post('storeCar', [CarController::class,'store'])->name('storeCar');
 Route::get('createCar', [CarController::class,'create']);
 
 
-Route::get('cars', [CarController::class,'index']);
+Route::get('cars', [CarController::class,'index'])->middleware('verified');
 Route::get('editCar/{id}', [CarController::class,'edit']);
 Route::put('updateCar/{id}', [CarController::class,'update'])->name('updateCar');
 
@@ -205,7 +205,7 @@ Route::get('restoreCar/{id}', [CarController::class,'restoreCar']);
 Route::get('showUpload', [Examplecontroller::class,'showUpload']);
 Route::post('upload', [Examplecontroller::class,'upload'])->name('upload');
 
-//task 8 upadte Image
+//task 8 upadte Image    rong
 
 // Route::get('editImage/{id}', [Examplecontroller::class,'editImage']);
 // Route::put('updateImage/{id}', [Examplecontroller::class,'updateImage'])->name('updateImage');
@@ -217,8 +217,6 @@ Route::get('blog', [Examplecontroller::class,'blog']);
 Route::get('login',[ExampleController::class, 'login']);
 
 
-Route::get('editCar/{id}', [CarController::class,'edit']);
-Route::put('updatCarcategory/{id}', [CarController::class,'update'])->name('updatCarcategory');
 
 
 
@@ -236,3 +234,30 @@ Route::put('updatePlace/{id}', [ExploreController::class,'updatePlace'])->name('
 Route::get('trashedPlace', [ExploreController::class,'trashedPlace']); 
 Route::get('placeDeleted/{id}', [ExploreController::class,'placeDeleted']);
 Route::get('restorePlace/{id}', [ExploreController::class,'restorePlace']);
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::get('session', [ExploreController::class,'mySession']);
+
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+        Route::get('contact', [ExploreController::class,'contact']);
+        Route::get('receiveContact', [ExploreController::class,'receiveContact']);
+    });
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+        Route::get('contactCar', [CarController::class,'contactCar']);
+        Route::get('receiveContactCar', [CarController::class,'receiveContactCar']);
+    });
