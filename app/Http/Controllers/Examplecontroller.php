@@ -79,4 +79,7 @@ class Examplecontroller extends Controller
     //     )
     //     return "mail";
     // }
+
+    
+  
 }
